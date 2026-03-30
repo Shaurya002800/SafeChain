@@ -1,22 +1,23 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
 
-dotenv.config();
+import express from "express"
+import cors from "cors"
+import dotenv from "dotenv"
 
-const app = express();
-const PORT = process.env.PORT || 8000;
+dotenv.config()
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+import complaintRoutes from "./routes/complaintRoutes.js"
 
-// A basic route to test
-app.get('/', (req, res) => {
-  res.send('Server is running!');
-});
+const app = express()
 
-// THIS IS THE KEY PART:
+app.use(cors())
+app.use(express.json())
+
+
+
+app.use("/api/complaints", complaintRoutes)
+
+const PORT = process.env.PORT || 8000
+
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+  console.log(`Server running on port ${PORT}`)
+})

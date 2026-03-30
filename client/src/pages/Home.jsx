@@ -1,190 +1,161 @@
-import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Shield, MapPin, Link as LinkIcon, Lock, Activity, ChevronRight, FileDigit, EyeOff } from 'lucide-react';
 
-const features = [
-  {
-    icon: '🔒',
-    title: 'Anonymous reporting',
-    desc: 'No account, no email, no identity. File a report in under 2 minutes with zero personal data collected.',
-    color: 'bg-purple-500/10 border-purple-500/20',
-  },
-  {
-    icon: '⛓️',
-    title: 'Blockchain evidence',
-    desc: 'Your screenshots and call logs are hashed on Polygon — immutable, tamper-proof, and legally verifiable.',
-    color: 'bg-blue-500/10 border-blue-500/20',
-  },
-  {
-    icon: '🗺️',
-    title: 'Real-time safety map',
-    desc: 'Crowd-sourced safety scores for every route and stop, updated live as new incidents are reported.',
-    color: 'bg-green-500/10 border-green-500/20',
-  },
-]
+const Home = () => {
+  // Animation variants for staggered entrance
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }
+    }
+  };
 
-const steps = [
-  {
-    num: '1',
-    color: 'bg-purple-500/20 text-purple-400',
-    title: 'You upload evidence',
-    desc: 'Screenshot, audio recording, or call log — anything that proves what happened.',
-  },
-  {
-    num: '2',
-    color: 'bg-blue-500/20 text-blue-400',
-    title: 'Stored on IPFS',
-    desc: 'Files go to IPFS — a decentralized network no single person or company controls.',
-  },
-  {
-    num: '3',
-    color: 'bg-amber-500/20 text-amber-400',
-    title: 'Hash anchored on blockchain',
-    desc: 'A cryptographic fingerprint of your file is permanently written to the Polygon blockchain.',
-  },
-  {
-    num: '4',
-    color: 'bg-green-500/20 text-green-400',
-    title: 'Legally verifiable forever',
-    desc: 'Anyone can verify your evidence was not altered — on-chain, publicly, permanently.',
-  },
-]
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+  };
 
-const stats = [
-  { num: '247', label: 'Reports filed' },
-  { num: '100%', label: 'Anonymous' },
-  { num: '0', label: 'Evidence tampered' },
-]
-
-export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
-
-      {/* ── Hero ── */}
-      <section className="max-w-4xl mx-auto px-6 pt-20 pb-16 text-center">
-
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 rounded-full px-4 py-1.5 text-purple-400 text-xs font-medium mb-8">
-          <span className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse" />
-          Blockchain-secured · Anonymous · Real-time
-        </div>
-
-        {/* Headline */}
-        <h1 className="text-5xl sm:text-6xl font-extrabold leading-tight tracking-tight mb-6">
-          Safety you can{' '}
-          <span className="text-purple-400">trust.</span>
-          <br />
-          Evidence that{' '}
-          <span className="text-emerald-400">can't be erased.</span>
-        </h1>
-
-        <p className="text-gray-400 text-lg leading-relaxed max-w-xl mx-auto mb-10">
-          Report incidents anonymously. Secure your evidence on the blockchain.
-          Navigate cities using real-time crowd-sourced safety scores.
-        </p>
-
-        {/* CTA buttons */}
-        <div className="flex items-center justify-center gap-3 flex-wrap">
-          <Link
-            to="/report"
-            className="px-8 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-bold text-base rounded-xl transition-colors duration-150"
+    <div className="flex flex-col space-y-24 pb-20 pt-10">
+      
+      {/* HERO SECTION */}
+      <motion.section 
+        className="text-center space-y-8 max-w-4xl mx-auto mt-10"
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        
+        <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-extrabold tracking-tight text-white">
+          Unified Safety Platform for <br className="hidden md:block" />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">
+            Real-Time Urban Safety
+          </span>
+        </motion.h1>
+        
+        <motion.p variants={itemVariants} className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          Report it. Secure it on the blockchain. Navigate safely. Plant anonymous safety pins instantly and protect your evidence from tampering.
+        </motion.p>
+        
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <Link 
+            to="/report" 
+            className="w-full sm:w-auto flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-500 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(147,51,234,0.4)]"
           >
-            ⚡ File a Report
+            File Anonymous Report
+            <ChevronRight className="w-5 h-5" />
           </Link>
-          <Link
-            to="/map"
-            className="px-8 py-3.5 bg-transparent hover:bg-white/5 text-gray-300 font-semibold text-base rounded-xl border border-white/10 transition-colors duration-150"
+          <Link 
+            to="/map" 
+            className="w-full sm:w-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-full text-lg font-medium transition-colors border border-slate-700"
           >
-            View Safety Map →
+            <MapPin className="w-5 h-5 text-slate-400" />
+            View Live Safety Map
           </Link>
-        </div>
+        </motion.div>
+      </motion.section>
 
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto mt-14">
-          {stats.map((s) => (
-            <div
-              key={s.label}
-              className="bg-purple-500/7 border border-purple-500/15 rounded-2xl py-5 px-4"
-            >
-              <p className="text-3xl font-extrabold text-purple-400">{s.num}</p>
-              <p className="text-xs text-gray-500 mt-1">{s.label}</p>
+      {/* LIVE STATS SECTION */}
+      <motion.section 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto w-full"
+      >
+        {[
+          { label: "Reports Filed", value: "1,248", icon: <FileDigit className="w-6 h-6 text-blue-400" /> },
+          { label: "Evidence Anchored", value: "3,192", icon: <LinkIcon className="w-6 h-6 text-purple-400" /> },
+          { label: "Active Map Flags", value: "847", icon: <Activity className="w-6 h-6 text-emerald-400" /> }
+        ].map((stat, idx) => (
+          <div key={idx} className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-2xl flex items-center gap-4 shadow-lg hover:border-slate-700 transition-colors">
+            <div className="p-3 bg-slate-800 rounded-xl">{stat.icon}</div>
+            <div>
+              <div className="text-3xl font-bold text-white">{stat.value}</div>
+              <div className="text-sm text-slate-400 font-medium uppercase tracking-wider">{stat.label}</div>
             </div>
-          ))}
+          </div>
+        ))}
+      </motion.section>
+
+      {/* HOW IT WORKS / BLOCKCHAIN EXPLAINER */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="max-w-6xl mx-auto w-full space-y-12"
+      >
+        <div className="text-center space-y-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">How blockchain protects your evidence</h2>
+          <p className="text-slate-400 max-w-2xl mx-auto">Traditional evidence gets deleted or tampered with. SafeChain anchors your proof to an immutable ledger.</p>
         </div>
-      </section>
 
-      {/* ── Features ── */}
-      <section className="max-w-5xl mx-auto px-6 py-16">
-        <p className="text-xs font-bold text-purple-500 tracking-widest uppercase mb-3">
-          What we do
-        </p>
-        <h2 className="text-3xl font-extrabold tracking-tight mb-2">
-          Two problems. One platform.
-        </h2>
-        <p className="text-gray-500 mb-10">
-          Built for those who need to be heard — and believed.
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {features.map((f) => (
-            <div
-              key={f.title}
-              className="bg-gray-900 border border-gray-800 hover:border-purple-500/40 rounded-2xl p-6 transition-colors duration-200"
-            >
-              <div className={`w-11 h-11 rounded-xl border flex items-center justify-center text-xl mb-5 ${f.color}`}>
-                {f.icon}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              title: "1. IPFS Pinning",
+              desc: "Files are pinned to the InterPlanetary File System (IPFS) generating a unique cryptographic fingerprint (CID).",
+              icon: <FileDigit className="w-8 h-8 text-blue-400" />
+            },
+            {
+              title: "2. Hash Anchoring",
+              desc: "The backend computes a keccak256 hash of the CID and anchors it to our EvidenceLocker smart contract.",
+              icon: <LinkIcon className="w-8 h-8 text-purple-400" />
+            },
+            {
+              title: "3. Legal Verification",
+              desc: "Anyone can verify the hash on the Polygon Mumbai testnet, proving the file was never altered.",
+              icon: <Shield className="w-8 h-8 text-emerald-400" />
+            }
+          ].map((feature, idx) => (
+            <div key={idx} className="bg-slate-900 border border-slate-800 p-8 rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+              <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity transform scale-150">
+                {feature.icon}
               </div>
-              <h3 className="font-bold text-base mb-2">{f.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+              <div className="bg-slate-800/50 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 border border-slate-700">
+                {feature.icon}
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+              <p className="text-slate-400 leading-relaxed">{feature.desc}</p>
             </div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
-      {/* ── How blockchain works ── */}
-      <section className="bg-gray-900/40 py-16">
-        <div className="max-w-3xl mx-auto px-6">
-          <p className="text-xs font-bold text-purple-500 tracking-widest uppercase mb-3">
-            How it works
+      {/* TRUST SIGNALS BANNER */}
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="max-w-5xl mx-auto w-full bg-gradient-to-r from-purple-900/40 to-indigo-900/40 border border-purple-500/20 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden"
+      >
+        <div className="absolute -left-10 -top-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-indigo-500/20 rounded-full blur-3xl"></div>
+        
+        <div className="relative z-10 space-y-6">
+          <EyeOff className="w-12 h-12 text-purple-400 mx-auto" />
+          <h2 className="text-3xl font-bold text-white">100% Anonymous Guarantees</h2>
+          <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+            We use Firebase Anonymous Auth. No email, no phone number, and no personal data is ever collected. Your identity remains entirely protected while you make your city safer.
           </p>
-          <h2 className="text-3xl font-extrabold tracking-tight mb-10">
-            How we make evidence tamper-proof
-          </h2>
-
-          <div className="flex flex-col divide-y divide-gray-800">
-            {steps.map((s) => (
-              <div key={s.num} className="flex gap-5 items-start py-5">
-                <div className={`w-9 h-9 rounded-xl flex items-center justify-center font-extrabold text-sm flex-shrink-0 mt-0.5 ${s.color}`}>
-                  {s.num}
-                </div>
-                <div>
-                  <h4 className="font-bold text-sm mb-1">{s.title}</h4>
-                  <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
-                </div>
-              </div>
-            ))}
+          <div className="flex flex-wrap justify-center gap-4 pt-4">
+            <span className="flex items-center gap-2 bg-black/30 px-4 py-2 rounded-lg text-sm text-slate-300 border border-white/5">
+              <Lock className="w-4 h-4 text-emerald-400" /> Zero PII
+            </span>
+            <span className="flex items-center gap-2 bg-black/30 px-4 py-2 rounded-lg text-sm text-slate-300 border border-white/5">
+              <Lock className="w-4 h-4 text-emerald-400" /> Backend Wallet Tx
+            </span>
+            <span className="flex items-center gap-2 bg-black/30 px-4 py-2 rounded-lg text-sm text-slate-300 border border-white/5">
+              <Lock className="w-4 h-4 text-emerald-400" /> No Tracking Cookies
+            </span>
           </div>
         </div>
-      </section>
-
-      {/* ── Bottom CTA ── */}
-      <section className="max-w-3xl mx-auto px-6 py-20 text-center">
-        <div className="bg-gradient-to-br from-purple-600/15 to-indigo-600/10 border border-purple-500/25 rounded-3xl px-8 py-14">
-          <h2 className="text-3xl font-extrabold tracking-tight mb-3">
-            Your safety matters.
-            <br />
-            Your evidence should too.
-          </h2>
-          <p className="text-gray-400 mb-8 text-base">
-            Join hundreds who've already secured their reports on the blockchain.
-          </p>
-          <Link
-            to="/report"
-            className="inline-block px-10 py-4 bg-purple-600 hover:bg-purple-700 text-white font-bold text-base rounded-xl transition-colors duration-150"
-          >
-            File an anonymous report →
-          </Link>
-        </div>
-      </section>
+      </motion.section>
 
     </div>
-  )
-}
+  );
+};
+
+export default Home;

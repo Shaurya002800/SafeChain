@@ -1,18 +1,19 @@
 
-import express from "express"
-import cors from "cors"
-import dotenv from "dotenv"
+const express = require("express")
+const cors = require("cors")
+require("dotenv").config()
 
-dotenv.config()
-
-import complaintRoutes from "./routes/complaintRoutes.js"
+const complaintRoutes = require("./routes/complaintRoutes")
 
 const app = express()
 
 app.use(cors())
 app.use(express.json())
 
-
+// Basic root route so visiting / in a browser returns a helpful message.
+app.get("/", (req, res) => {
+  return res.send("SafeChain backend running. Use /api/complaints for API routes.")
+})
 
 app.use("/api/complaints", complaintRoutes)
 

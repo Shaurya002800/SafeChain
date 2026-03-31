@@ -1,9 +1,9 @@
-import hre from "hardhat";
+import { ethers } from "hardhat";
 
 async function main() {
   console.log("Deploying EvidenceLocker contract...");
 
-  const EvidenceLocker = await hre.ethers.getContractFactory("EvidenceLocker");
+  const EvidenceLocker = await ethers.getContractFactory("EvidenceLocker");
   const locker = await EvidenceLocker.deploy();
   
   await locker.waitForDeployment();
@@ -12,7 +12,7 @@ async function main() {
   
   console.log("✅ EvidenceLocker deployed to:", address);
   console.log("🔗 View on PolygonScan:");
-  console.log(`https://mumbai.polygonscan.com/address/${address}`);
+  console.log(`https://amoy.polygonscan.com/address/${address}`);
 }
 
 main()

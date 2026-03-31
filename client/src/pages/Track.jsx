@@ -190,10 +190,19 @@ const Track = () => {
                   <div>
                     <p className="text-xs text-slate-500 uppercase tracking-wider mb-2">Polygon Tx Hash</p>
                     <div className="bg-slate-950/50 p-3 rounded-xl border border-slate-800/80 flex items-center justify-between">
-                      <span className="font-mono text-sm text-slate-400 truncate mr-4">{reportData.txHash}</span>
-                      <a href={`https://mumbai.polygonscan.com/tx/${reportData.txHash}`} target="_blank" rel="noreferrer" className="text-purple-400 hover:text-purple-300 flex items-center gap-1 text-xs font-medium uppercase tracking-wide">
-                        Verify <ExternalLink className="w-3 h-3" />
-                      </a>
+                      <span className="font-mono text-sm text-slate-400 truncate mr-4">{reportData.txHash || '—'}</span>
+                      {reportData.txHash ? (
+                        <a
+                          href={`https://amoy.polygonscan.com/tx/${encodeURIComponent(reportData.txHash)}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-purple-400 hover:text-purple-300 flex items-center gap-1 text-xs font-medium uppercase tracking-wide"
+                        >
+                          Verify <ExternalLink className="w-3 h-3" />
+                        </a>
+                      ) : (
+                        <span className="text-slate-500 text-sm">Not anchored yet</span>
+                      )}
                     </div>
                   </div>
                 </div>

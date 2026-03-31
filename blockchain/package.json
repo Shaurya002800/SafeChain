@@ -2,16 +2,15 @@
   "name": "blockchain",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "scripts": {
     "test": "hardhat test",
     "compile": "hardhat compile",
-    "deploy:amoy": "hardhat ignition deploy ignition/modules/EvidenceLocker.ts --network amoy"
+    "deploy:amoy": "hardhat run scripts/deploy.ts --network amoy"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "@nomicfoundation/hardhat-ignition-ethers": "^0.15.0",
-    "hardhat": "^3.2.0",
+    "hardhat": "^2.22.0",
     "dotenv": "^16.0.0"
   }
 }
